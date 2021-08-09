@@ -2,7 +2,6 @@
 
 class Item {
 	static rebootId = function () {
-		console.log(this.id);
 		return Math.floor(Math.random() * 1000);
 	};
 

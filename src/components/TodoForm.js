@@ -1,27 +1,32 @@
 /** @format */
 
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../actions/listAction';
 
 function TodoForm(props) {
+	const dispatch = useDispatch();
 	const [text, setText] = useState('');
 
 	function handleChange(event) {
+		
 		let t = event.target.value;
 		setText(t);
 	}
 
-	function addItem(event) {
+	function addItemEvent(event) {
 		event.preventDefault();
 		if (text) {
-			props.onAddItem(text);
+			dispatch(addItem(text));
 			setText('');
+			props.onHideModal()
 		}
 	}
 
 	return (
 		<form>
 			<input onChange={handleChange} type='text' value={text}></input>
-			<button onClick={addItem}>Adicionar</button>
+			<button onClick={addItemEvent}>Adicionar</button>
 		</form>
 	);
 }
